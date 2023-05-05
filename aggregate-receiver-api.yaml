@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: DNS TAPIR Aggregate Receiver API
+  version: 0.0.1
+servers:
+  - url: /api/v1
+
+paths:
+
+  /aggregate/{aggregate_type}:
+    post:
+      description: Create aggregate
+      operationId: create_aggregate
+      parameters:
+        - name: aggregate_type
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/aggregate_type'
+        - name: Signature-Input
+          description: draft-ietf-httpbis-message-signatures
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: Signature
+          description: draft-ietf-httpbis-message-signatures
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Aggregate as Apache Parquet
+        content:
+          application/vnd.apache.parquet:
+            schema: {}
+      responses:
+        "201":
+          description: Aggregate created
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+
+  /aggregate/{aggregate_id}/metadata:
+    get:
+      description: Get aggregate_metadata
+      operationId: get_aggregate_metadata
+      parameters:
+        - name: aggregate_id
+          in: path
+          description: Aggregate Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Aggregate metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/aggregate_metadata'
+
+  /aggregate/{aggregate_id}/payload:
+    get:
+      description: Get aggregate_payload
+      operationId: get_aggregate_payload
+      parameters:
+        - name: aggregate_id
+          in: path
+          description: Aggregate Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Aggregate as Apache Parquet
+          content:
+            application/vnd.apache.parquet:
+              schema: {}
+
+
+components:
+  schemas:
+    
+    aggregate_metadata:
+      description: Aggregate metadata
+      type: object
+      required:
+        - created
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/aggregate_type'
+        created:
+          type: string
+          format: date-time
+        signature:
+          type: string
+          format: date-time
+
+    aggregate_type:
+      type: string
+      enum:
+        - histogram
+        - vector
