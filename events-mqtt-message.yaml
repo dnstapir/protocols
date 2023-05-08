@@ -1,0 +1,19 @@
+$schema: http://json-schema.org/schema#
+
+type: object
+anyOf:
+  - $ref: '#/components/schemas/event_new_domain'
+
+
+components:
+  schemas:
+    event_new_domain:
+      type: object
+      required:
+        - type
+        - domain
+      properties:
+        type:
+          const: "new"
+        domain:
+          type: string
