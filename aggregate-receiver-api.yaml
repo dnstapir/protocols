@@ -9,7 +9,7 @@ paths:
 
   /aggregate/{aggregate_type}:
     post:
-      description: Create aggregate
+      summary: Create aggregate
       operationId: create_aggregate
       parameters:
         - name: aggregate_type
@@ -17,16 +17,39 @@ paths:
           required: true
           schema:
             $ref: '#/components/schemas/aggregate_type'
-        - name: Signature-Input
-          description: draft-ietf-httpbis-message-signatures
+        - name: Content-Length
           in: header
           required: true
           schema:
-            type: string
-        - name: Signature
-          description: draft-ietf-httpbis-message-signatures
+            type: integer
+            format: int64
+            minimum: 0
+        - name: Content-Type
           in: header
           required: true
+          schema:
+            $ref: '#/components/schemas/content_type'
+        - name: Content-Digest
+          in: header
+          required: false
+          schema:
+            type: string
+        - name: Signature-Input
+          description: |
+            The following HTTP headers MUST be signed:
+
+              - Content-Length
+              - Content-Type
+              - Content-Digest
+
+            Derived components MUST NOT be included in the signature input.
+          in: header
+          required: false
+          schema:
+            type: string
+        - name: Signature
+          in: header
+          required: false
           schema:
             type: string
       requestBody:
@@ -93,7 +116,7 @@ components:
       properties:
         id:
           type: string
-        type:
+        aggregate_type:
           $ref: '#/components/schemas/aggregate_type'
         created:
           type: string
@@ -104,9 +127,19 @@ components:
           description: TLS client certificate fingerprint (SHA-256 as hex)
           type: string
           pattern: "^[0-9a-f]{64}"
+        content_type:
+          $ref: '#/components/schemas/content_type'
+        content_payload_location:
+          type: string
+          format: uri
 
     aggregate_type:
       type: string
       enum:
         - histogram
         - vector
+
+    content_type:
+      type: string
+      enum:
+        - "application/vnd.apache.parquet"
