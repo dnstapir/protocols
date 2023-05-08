@@ -76,7 +76,7 @@ paths:
           description: Aggregate Id
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/aggregate_id'
       responses:
         "200":
           description: Aggregate metadata
@@ -95,10 +95,16 @@ paths:
           description: Aggregate Id
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/aggregate_id'
       responses:
         "200":
           description: Aggregate as Apache Parquet
+          headers:
+            Link:
+              description: |
+                Linked resources (RFC 8288), rel="about" for metadata URL
+              schema:
+                type: string
           content:
             application/vnd.apache.parquet:
               schema: {}
@@ -112,15 +118,20 @@ components:
       type: object
       required:
         - id
-        - type
+        - aggregate_type
+        - created
+        - content_type
+        - content_payload_location
       properties:
         id:
-          type: string
+          $ref: '#/components/schemas/aggregate_id'
         aggregate_type:
           $ref: '#/components/schemas/aggregate_type'
         created:
           type: string
           format: date-time
+        creator:
+          type: string
         headers:
           type: object
         tls_client_fingerprint:
@@ -132,6 +143,9 @@ components:
         content_payload_location:
           type: string
           format: uri
+
+    aggregate_id:
+      type: string
 
     aggregate_type:
       type: string
