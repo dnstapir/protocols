@@ -7,7 +7,7 @@ servers:
 
 paths:
 
-  /aggregate/{aggregate_type}:
+  /aggregates/{aggregate_type}:
     post:
       summary: Create aggregate
       operationId: create_aggregate
@@ -66,7 +66,7 @@ paths:
                 type: string
                 format: uri
 
-  /aggregate/{aggregate_id}/metadata:
+  /aggregates/{aggregate_id}/metadata:
     get:
       description: Get aggregate_metadata
       operationId: get_aggregate_metadata
@@ -85,7 +85,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/aggregate_metadata'
 
-  /aggregate/{aggregate_id}/payload:
+  /aggregates/{aggregate_id}/payload:
     get:
       description: Get aggregate_payload
       operationId: get_aggregate_payload
