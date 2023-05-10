@@ -2,18 +2,34 @@ $schema: http://json-schema.org/schema#
 
 type: object
 anyOf:
-  - $ref: '#/components/schemas/event_new_domain'
+  - $ref: '#/components/schemas/new_domain'
+  - $ref: '#/components/schemas/new_aggregate'
 
 
 components:
   schemas:
-    event_new_domain:
+    new_domain:
       type: object
       required:
         - type
         - domain
       properties:
         type:
-          const: "new"
+          const: "new_domain"
         domain:
           type: string
+    new_aggregate:
+      type: object
+      required:
+        - type
+        - metadata_location
+        - content_payload_location
+      properties:
+        type:
+          const: "new_aggregate"
+        metadata_location:
+          type: string
+          format: uri
+        content_payload_location:
+          type: string
+          format: uri
