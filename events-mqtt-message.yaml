@@ -1,24 +1,62 @@
+# DNS TAPIR Event schema version 1
+
 $schema: http://json-schema.org/schema#
 
 type: object
+additionalProperties: True
+required:
+  - version
+  - timestamp
+  - type
+properties:
+  version:
+    type: integer
+    minimum: 0
+  timestamp:
+    type: string
+    format: date-time
 anyOf:
-  - $ref: '#/components/schemas/new_domain'
+  - $ref: '#/components/schemas/new_qname'
   - $ref: '#/components/schemas/new_aggregate'
 
 
 components:
   schemas:
-    new_domain:
+
+    new_qname:
+      description: New QNAME seen
       type: object
       required:
         - type
-        - domain
+        - qname
       properties:
         type:
-          const: "new_domain"
-        domain:
+          const: "new_qname"
+        initiator:
           type: string
+          enum:
+            - client
+            - resolver
+        qname:
+          description: Query Name
+          $ref: '#/components/schemas/domain_reverse_array'
+        qtype:
+          description: Query Type
+          type: integer
+          minimum: 0
+        qclass:
+          description: Query Class
+          type: integer
+          minimum: 0
+        flags:
+          description: Flag Field (QR/Opcode/AA/TC/RD/TA/Z/RCODE)
+          type: integer
+        rdlength:
+          type: integer
+          minimum: 0
+
     new_aggregate:
+      description: New aggregate created
       type: object
       required:
         - type
@@ -27,9 +65,16 @@ components:
       properties:
         type:
           const: "new_aggregate"
+        creator:
+          type: string
         metadata_location:
           type: string
           format: uri
         content_payload_location:
           type: string
           format: uri
+
+    domain_reverse_array:
+      type: array
+      items:
+        type: string
