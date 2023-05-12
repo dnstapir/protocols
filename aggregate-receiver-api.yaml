@@ -112,7 +112,7 @@ paths:
 
 components:
   schemas:
-    
+
     aggregate_metadata:
       description: Aggregate metadata
       type: object
@@ -140,6 +140,10 @@ components:
           pattern: "^[0-9a-f]{64}"
         content_type:
           $ref: '#/components/schemas/content_type'
+        content_length:
+          type: integer
+          format: int64
+          minimum: 0
         content_payload_location:
           type: string
           format: uri
