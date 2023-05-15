@@ -66,7 +66,7 @@ paths:
                 type: string
                 format: uri
 
-  /aggregates/{aggregate_id}/metadata:
+  /aggregates/{aggregate_id}:
     get:
       description: Get aggregate_metadata
       operationId: get_aggregate_metadata
@@ -125,7 +125,7 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/aggregate_id'
-        aggregate_type:
+        type:
           $ref: '#/components/schemas/aggregate_type'
         created:
           type: string
@@ -134,10 +134,6 @@ components:
           type: string
         headers:
           type: object
-        tls_client_fingerprint:
-          description: TLS client certificate fingerprint (SHA-256 as hex)
-          type: string
-          pattern: "^[0-9a-f]{64}"
         content_type:
           $ref: '#/components/schemas/content_type'
         content_length:
