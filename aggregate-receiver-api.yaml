@@ -140,7 +140,7 @@ components:
           type: integer
           format: int64
           minimum: 0
-        content_payload_location:
+        content_location:
           type: string
           format: uri
 
