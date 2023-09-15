@@ -39,7 +39,7 @@ components:
             - resolver
         qname:
           description: Query Name
-          $ref: '#/components/schemas/domain_reverse_array'
+          $ref: '#/components/schemas/domain_name'
         qtype:
           description: Query Type
           type: integer
@@ -74,7 +74,5 @@ components:
           type: string
           format: uri
 
-    domain_reverse_array:
-      type: array
-      items:
-        type: string
+    domain_name:
+      type: string
