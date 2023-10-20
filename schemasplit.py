@@ -35,17 +35,14 @@ def main():
 
         schema2 = deepcopy(schema)
 
-        schema2["properties"].update(
-            schema["components"]["schemas"][subschema_name]["properties"]
-        )
+        schema2["properties"].update(schema["$defs"][subschema_name]["properties"])
         schema2["required"] = list(
-            set(schema2["required"])
-            | set(schema["components"]["schemas"][subschema_name]["required"])
+            set(schema2["required"]) | set(schema["$defs"][subschema_name]["required"])
         )
 
         del schema2["anyOf"]
         for n in subschemas_names:
-            del schema2["components"]["schemas"][n]
+            del schema2["$defs"][n]
 
         output = Path(args.schema).stem + f"-{subschema_name}.json"
         with open(output, "wt") as fp:

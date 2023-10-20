@@ -16,63 +16,61 @@ properties:
     type: string
     format: date-time
 anyOf:
-  - $ref: '#/components/schemas/new_qname'
-  - $ref: '#/components/schemas/new_aggregate'
+  - $ref: '#/$defs/new_qname'
+  - $ref: '#/$defs/new_aggregate'
 
 
-components:
-  schemas:
+$defs:
+  new_qname:
+    description: New QNAME seen
+    type: object
+    required:
+      - type
+      - qname
+    properties:
+      type:
+        const: "new_qname"
+      initiator:
+        type: string
+        enum:
+          - client
+          - resolver
+      qname:
+        description: Query Name
+        $ref: '#/$defs/domain_name'
+      qtype:
+        description: Query Type
+        type: integer
+        minimum: 0
+      qclass:
+        description: Query Class
+        type: integer
+        minimum: 0
+      flags:
+        description: Flag Field (QR/Opcode/AA/TC/RD/TA/Z/RCODE)
+        type: integer
+      rdlength:
+        type: integer
+        minimum: 0
 
-    new_qname:
-      description: New QNAME seen
-      type: object
-      required:
-        - type
-        - qname
-      properties:
-        type:
-          const: "new_qname"
-        initiator:
-          type: string
-          enum:
-            - client
-            - resolver
-        qname:
-          description: Query Name
-          $ref: '#/components/schemas/domain_name'
-        qtype:
-          description: Query Type
-          type: integer
-          minimum: 0
-        qclass:
-          description: Query Class
-          type: integer
-          minimum: 0
-        flags:
-          description: Flag Field (QR/Opcode/AA/TC/RD/TA/Z/RCODE)
-          type: integer
-        rdlength:
-          type: integer
-          minimum: 0
+  new_aggregate:
+    description: New aggregate created
+    type: object
+    required:
+      - type
+      - metadata_location
+      - content_payload_location
+    properties:
+      type:
+        const: "new_aggregate"
+      creator:
+        type: string
+      metadata_location:
+        type: string
+        format: uri
+      content_payload_location:
+        type: string
+        format: uri
 
-    new_aggregate:
-      description: New aggregate created
-      type: object
-      required:
-        - type
-        - metadata_location
-        - content_payload_location
-      properties:
-        type:
-          const: "new_aggregate"
-        creator:
-          type: string
-        metadata_location:
-          type: string
-          format: uri
-        content_payload_location:
-          type: string
-          format: uri
-
-    domain_name:
-      type: string
+  domain_name:
+    type: string
