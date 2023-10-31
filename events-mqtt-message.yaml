@@ -29,6 +29,7 @@ $defs:
       - qname
     properties:
       type:
+        type: string
         const: "new_qname"
       initiator:
         type: string
@@ -62,6 +63,7 @@ $defs:
       - content_payload_location
     properties:
       type:
+        type: string
         const: "new_aggregate"
       creator:
         type: string
