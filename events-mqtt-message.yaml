@@ -70,9 +70,24 @@ $defs:
       metadata_location:
         type: string
         format: uri
-      content_payload_location:
+      content_location:
         type: string
         format: uri
+      aggregate_id:
+        type: string
+      aggregate_type:
+        type: string
+      aggregate_interval_start:
+        type: string
+        format: date-time
+      aggregate_interval_duration:
+        type: integer
+        format: int64
+        minimum: 0
+      s3_bucket:
+        type: string
+      s3_object_key:
+        type: string
 
   domain_name:
     type: string
