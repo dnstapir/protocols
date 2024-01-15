@@ -1,0 +1,61 @@
+# DNS TAPIR Edge Configuration schema version 1
+
+$schema: http://json-schema.org/schema#
+
+type: object
+additionalProperties: True
+properties:
+  tagged_well_known_domains:
+    object: array
+    items:
+      $ref: '#/$defs/tagged_well_known_domains'
+  truncated_domains:
+    $ref: '#/$defs/truncated_domains'
+  intelligence_feed:
+    $ref: '#/$defs/intelligence_feed'
+
+$defs:
+  tagged_well_known_domains:
+    description: Tagged Well Known Domain (TWKD)
+    type: object
+    required:
+      - location
+      - format
+    properties:
+      location:
+        type: string
+        format: uri
+      format:
+        type: string
+        enum:
+          - DAWGv1
+      domain_wildcard:
+        description: Match *.example.com
+        type: bool
+      domain_suffix:
+        type: bool
+        description: Match example.com or .example.com
+  truncated_domains:
+    description: Truncated Domain Wildcard List (TDWL)
+    type: object
+    required:
+      - location
+      - format
+    properties:
+      location:
+        type: string
+        format: uri
+      format:
+        type: string
+        enum:
+          - TAPIRv1
+  intelligence_feed:
+    description: Intellegence Feed
+    type: object
+    required:
+      - location
+    properties:
+      location:
+        type: string
+        format: uri
+        example: mqtts://example.com/feed/me
