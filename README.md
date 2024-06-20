@@ -11,7 +11,7 @@ This repository contains protocol documentation.
 ### Edge to Core
 
 - `events/up/SENDER/#` (signed)
-  - [new_aggregate](events-mqtt-message-new_qname.yaml)
+  - [new_qname](events-mqtt-message-new_qname.yaml)
 
 - `status/up/SENDER/#` (signed)
   - TBD
