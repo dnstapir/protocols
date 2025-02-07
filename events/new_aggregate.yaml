@@ -1,0 +1,31 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+
+type: object
+required:
+  - type
+  - version
+  - metadata_location
+  - content_payload_location
+  - timestamp
+additionalProperties: true
+properties:
+  type:
+    const: new_aggregate
+  version:
+    type: integer
+    minimum: 0
+  timestamp:
+    type: string
+    format: date-time
+  content_payload_location:
+    type: string
+    format: uri
+  creator:
+    type: string
+  metadata_location:
+    type: string
+    format: uri
+
+$defs:
+  domain_name:
+    type: string

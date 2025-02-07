@@ -1,0 +1,44 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+
+type: object
+required:
+  - type
+  - version
+  - timestamp
+  - qname
+additionalProperties: true
+properties:
+  type:
+    const: new_qname
+  version:
+    minimum: 0
+    type: integer
+  timestamp:
+    type: string
+    format: date-time
+  qclass:
+    description: Query Class
+    type: integer
+    minimum: 0
+  qname:
+    description: Query Name
+    $ref: '#/$defs/domain_name'
+  qtype:
+    description: Query Type
+    type: integer
+    minimum: 0
+  rdlength:
+    type: integer
+    minimum: 0
+  flags:
+    description: Flag Field (QR/Opcode/AA/TC/RD/TA/Z/RCODE)
+    type: integer
+  initiator:
+    type: string
+    enum:
+      - client
+      - resolver
+
+$defs:
+  domain_name:
+    type: string
