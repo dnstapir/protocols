@@ -19,7 +19,8 @@ This repository contains protocol documentation.
 ### Core to Edge
 
 - `observations/down/#`  (signed)
-  - TBD
+  - [Observation](edge-observations.yaml)
+  - [An example](observation.sample.json)
 
 - `config/down/#` (signed)
   - TBD
