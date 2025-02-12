@@ -1,10 +1,12 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 
+$id: https://schema.dnstapir.se/v1/new_qname
+
 type: object
 required:
   - type
   - version
-  - timestamp
+  - message_id
   - qname
 additionalProperties: true
 properties:
@@ -13,6 +15,9 @@ properties:
   version:
     minimum: 0
     type: integer
+  message_id:
+    type: string
+    format: uuid
   timestamp:
     type: string
     format: date-time
@@ -22,7 +27,7 @@ properties:
     minimum: 0
   qname:
     description: Query Name
-    $ref: '#/$defs/domain_name'
+    type: string
   qtype:
     description: Query Type
     type: integer
@@ -38,7 +43,3 @@ properties:
     enum:
       - client
       - resolver
-
-$defs:
-  domain_name:
-    type: string
