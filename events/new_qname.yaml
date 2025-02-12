@@ -6,7 +6,6 @@ type: object
 required:
   - type
   - version
-  - message_id
   - qname
 additionalProperties: true
 properties:
