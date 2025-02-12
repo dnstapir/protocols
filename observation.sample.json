@@ -1,0 +1,19 @@
+{
+    "src_name": "dns-tapir",
+    "creator": "spark",
+    "msg_type": "observation",
+    "list_type": "doubtlist",
+    "added": [
+        {
+            "name": "example.com",
+            "time_added": "2025-02-11T12:04:01,048076565+01:00",
+            "ttl": 3600,
+            "tag_mask": 134,
+            "extended_tags": []
+        }
+    ],
+    "removed": [],
+    "msg": "",
+    "timestamp": "2025-02-11T13:04:01,048076565+01:00",
+    "time_str": ""
+}
