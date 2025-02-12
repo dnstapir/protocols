@@ -1,14 +1,16 @@
-GENERATED=	events-mqtt-message.json \
-		edge-configuration.json
+GENERATED=	events/new_qname.json \
+		events/new_aggregate.json \
+		edge-observations.json
 
 
-validate: $(GENERATED)
-	ajv --spec=draft2019 --strict=false compile -s $<
+all: $(GENERATED) validate
 
-events-mqtt-message.json: events-mqtt-message.yaml
-	 yq . < $< -o json > $@
+validate:
+	for file in $(GENERATED) ; do \
+		ajv --spec=draft2020 --strict=false compile -s $$file ;\
+	done
 
-edge-configuration.json: edge-configuration.yaml
+%.json: %.yaml
 	 yq . < $< -o json > $@
 
 clean:
