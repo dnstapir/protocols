@@ -1,5 +1,7 @@
 $schema: https://json-schema.org/draft/2020-12/schema
+
 $id: https://schema.dnstapir.se/v1/core_observation
+
 title: DNS TAPIR CORE Observations
 description: Schema for DNS TAPIR CORE observations going from CORE to EDGE
 type: object
@@ -14,6 +16,9 @@ required:
   - timestamp
   - time_str
 properties:
+  message_id:
+    type: string
+    format: uuid
   src_name:
     description: The name of the intelligence source, must match config in POP
     type: string
