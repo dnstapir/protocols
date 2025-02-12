@@ -1,4 +1,5 @@
 {
+    "$schema": "https://schema.dnstapir.se/v1/core_observation",
     "src_name": "dns-tapir",
     "creator": "spark",
     "msg_type": "observation",
