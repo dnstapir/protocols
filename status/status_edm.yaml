@@ -1,0 +1,21 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+
+$id: https://schema.dnstapir.se/v1/status/edm
+
+type: object
+required:
+  - type
+  - version
+  - state
+additionalProperties: true
+properties:
+  type:
+    const: status_edm
+  version:
+    minimum: 0
+    type: integer
+  state:
+    type: string
+    enum:
+      - connected
+      - disconnected
