@@ -1,4 +1,4 @@
 edge-observations.json
-events/new_aggregate.json
-events/new_qname.json
+events/*.json
+status/*.json
 package-lock.json

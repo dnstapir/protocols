@@ -1,5 +1,7 @@
 GENERATED=	events/new_qname.json \
 		events/new_aggregate.json \
+		status/status_edm.json \
+		status/status_pop.json \
 		edge-observations.json
 
 
